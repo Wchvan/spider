@@ -82,9 +82,10 @@ class Spider:
                                 f.write(
                                     "ProductName: " + product_name + "\n" + "Price: " + price_value + "\n" + "Rate:" \
                                     + rating + "\n" + "Title: {}".format(review_title) + "\n" + \
-                                    "Body: {}".format(review_content) + "\n" + "img_url:" + img_url + "\n" + "-----" + "\n\n\n")
-                                upload_noteDday(review_title, review_content, price_value, rating, product_name, urls,
-                                                '47,51,500', 42)
+                                    "Body: {}".format(
+                                        review_content) + "\n" + "img_url:" + img_url + "\n" + "-----" + "\n\n\n")
+                                upload_noteDday(review_title, review_content, price_value, rating, product_name,
+                                                img_url, '47,51,500', 42)
             except Exception as e:
                 continue
 
@@ -103,33 +104,53 @@ def spider_task(url, page, page_size, goods_index):
 
 
 if __name__ == '__main__':
-   urls = ["https://www.dickssportinggoods.com/f/baseball-bats?pageNumber="]
-   for url in urls:
-       # 设置每个线程处理的页面范围
-       page_1 = 0
-       page_2 = 1
-       page_3 = 2
-       page_4 = 3
-       # page_5 = 4
+    urls = ["https://www.dickssportinggoods.com/f/baseball-bats?pageNumber=",
+            "https://www.dickssportinggoods.com/f/marucci-victus-wood-bat-promo?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-gloves?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-cleats-shoes?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-apparel-shop-all?pageNumber=",
+            "https://www.dickssportinggoods.com/f/batting-gloves?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-batting-helmets?pageNumber=",
+            "https://www.dickssportinggoods.com/f/protective-gear-for-baseball?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-bags?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-training-aids-shop-all?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-catchers-gear?pageNumber=",
+            "https://www.dickssportinggoods.com/f/umpire-equipment?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseballs?pageNumber=",
+            "https://www.dickssportinggoods.com/f/baseball-field-equipment-maintenance?pageNumber=",
+            "https://www.dickssportinggoods.com/f/tball-shop?pageNumber="]
+    page_num = [4, 1, 4, 3, 4, 4, 2, 3, 3, 4, 1, 2, 1, 4]
+    for index in range(len(urls)):
+        thread_arr = []
+        for page in range(page_num[index]):
+            thread_arr.append(threading.Thread(target=spider_task, args=(urls[index], page, 1, 0)))
+        for thread in thread_arr:
+            thread.start()
+        for thread in thread_arr:
+            thread.join()
 
-       # 创建线程
-       thread1 = threading.Thread(target=spider_task, args=(url, page_1, 1, 0))
-       thread2 = threading.Thread(target=spider_task, args=(url, page_2, 1, 0))
-       thread3 = threading.Thread(target=spider_task, args=(url, page_3, 1, 0))
-       thread4 = threading.Thread(target=spider_task, args=(url, page_4, 1, 0))
-       # thread5 = threading.Thread(target=spider_task, args=(url, page_5, 1, 0))
+        # 设置每个线程处理的页面范围
+        # page_1 = 0
+        # page_2 = 1
+        # page_3 = 2
+        # page_4 = 3
+        # page_5 = 4
 
-       # 启动线程
-       thread1.start()
-       thread2.start()
-       thread3.start()
-       thread4.start()
-       # thread5.start()
+        # 创建线程
+        #     thread1 = threading.Thread(target=spider_task, args=(url, page_1, 1, 0))
+        #     thread2 = threading.Thread(target=spider_task, args=(url, page_2, 1, 0))
+        #     thread3 = threading.Thread(target=spider_task, args=(url, page_3, 1, 0))
+        #     thread4 = threading.Thread(target=spider_task, args=(url, page_4, 1, 0))
+        # thread5 = threading.Thread(target=spider_task, args=(url, page_5, 1, 0))
 
-       # 等待所有线程结束
-       thread1.join()
-       thread2.join()
-       thread3.join()
-       thread4.join()
-       # thread5.join()
-
+        # 启动线程
+        # thread1.start()
+        # thread2.start()
+        # thread3.start()
+        # thread4.start()
+        #
+        # # 等待所有线程结束
+        # thread1.join()
+        # thread2.join()
+        # thread3.join()
+        # thread4.join()
