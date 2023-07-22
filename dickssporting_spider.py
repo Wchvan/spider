@@ -85,7 +85,7 @@ class Spider:
                                     "Body: {}".format(
                                         review_content) + "\n" + "img_url:" + img_url + "\n" + "-----" + "\n\n\n")
                                 upload_noteDday(review_title, review_content, price_value, rating, product_name,
-                                                img_url, '47,51,500', 42)
+                                                img_url, '47,48,500', 41)
             except Exception as e:
                 continue
 
@@ -104,22 +104,22 @@ def spider_task(url, page, page_size, goods_index):
 
 
 if __name__ == '__main__':
-    urls = ["https://www.dickssportinggoods.com/f/baseball-bats?pageNumber=",
-            "https://www.dickssportinggoods.com/f/marucci-victus-wood-bat-promo?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-gloves?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-cleats-shoes?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-apparel-shop-all?pageNumber=",
-            "https://www.dickssportinggoods.com/f/batting-gloves?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-batting-helmets?pageNumber=",
-            "https://www.dickssportinggoods.com/f/protective-gear-for-baseball?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-bags?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-training-aids-shop-all?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-catchers-gear?pageNumber=",
-            "https://www.dickssportinggoods.com/f/umpire-equipment?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseballs?pageNumber=",
-            "https://www.dickssportinggoods.com/f/baseball-field-equipment-maintenance?pageNumber=",
-            "https://www.dickssportinggoods.com/f/tball-shop?pageNumber="]
-    page_num = [4, 1, 4, 3, 4, 4, 2, 3, 3, 4, 1, 2, 1, 4]
+    urls = ["https://www.dickssportinggoods.com/f/basketballs?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-hoops?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-shoes?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-skills-training?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-court-equipment?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-apparel?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-leg-compression-sleeves?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-backpacks-bags?pageNumber=",
+            "https://www.dickssportinggoods.com/f/coach-ref-gym-gear?pageNumber=",
+            "https://www.dickssportinggoods.com/c/basketball-accessories?pageNumber=",
+            "https://www.dickssportinggoods.com/f/wristbands?pageNumber=",
+            "https://www.dickssportinggoods.com/f/basketball-mouthguards?pageNumber=",
+            "https://www.dickssportinggoods.com/f/sport-inflation-devices?pageNumber=",
+            "https://www.dickssportinggoods.com/f/sports-pinnies?pageNumber=",
+            "https://www.dickssportinggoods.com/f/sport-braces-support?pageNumber="]
+    page_num = [3, 1, 4, 1, 2, 4, 1, 1, 2, 1, 1, 1, 1, 1, 4]
     for index in range(len(urls)):
         thread_arr = []
         for page in range(page_num[index]):
