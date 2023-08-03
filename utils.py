@@ -5,6 +5,9 @@ import random
 from loguru import logger
 from time import sleep
 from note import Note
+from urllib.request import getproxies
+import string
+from constant import ip_pool
 
 def _random_sleep(minimum=10, maximum=20):
     t = random.randint(minimum, maximum)
@@ -57,3 +60,26 @@ def upload_noteDday(titleraw, contentraw, price, rating, productname, img, tag, 
     note.origin_files = img
 
     note.upload_new_note(note_group_id=groupid)
+
+
+def get_correct_proxies():
+    headers = getproxies();
+    try:
+        if(len(headers) <= 0):
+            return {};
+        if(headers.get('https') is not None):
+            headers['https'] = headers['https'].replace('https', 'http');
+        return headers;
+    except Exception as e:
+        logger.error(e)
+        return {};
+
+def generate_passwd(length):
+    """ 生成密码 """
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+
+
+def generate_ip():
+    ip = random.choice(ip_pool)
+    logger.info(ip)
+    return ip

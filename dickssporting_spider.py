@@ -41,8 +41,9 @@ class Spider:
                 with open("break.txt", "a") as f:
                     f.write(str(self.spider_url) + "_____" + str(self.goods_index) + "\n")
                 self.driver.get(link)
-                time.sleep(10)
-                self.driver.execute_script("window.scrollTo(0, 3500);")
+                for distance in range(10):
+                    self.driver.execute_script("window.scrollTo(0, {});".format(distance * 500))
+                    time.sleep(3)
                 if (_wait_for_element(self.driver, "bv-content-summary-body-text", "class", 60)):
                     product_name_element = self.driver.find_element(By.XPATH, '//h1[@itemprop="name"]')
                     product_name = product_name_element.text
@@ -120,14 +121,20 @@ if __name__ == '__main__':
             "https://www.dickssportinggoods.com/f/sports-pinnies?pageNumber=",
             "https://www.dickssportinggoods.com/f/sport-braces-support?pageNumber="]
     page_num = [3, 1, 4, 1, 2, 4, 1, 1, 2, 1, 1, 1, 1, 1, 4]
-    for index in range(len(urls)):
-        thread_arr = []
-        for page in range(page_num[index]):
-            thread_arr.append(threading.Thread(target=spider_task, args=(urls[index], page, 1, 0)))
-        for thread in thread_arr:
-            thread.start()
-        for thread in thread_arr:
-            thread.join()
+    # spider_task(urls[4], 1, 1, 11)
+    # thread1 = threading.Thread(target=spider_task, args=(urls[2], 1, 1, 49))
+    # thread2 = threading.Thread(target=spider_task, args=(urls[2], 3, 1, 49))
+    # thread1.start()
+    # thread2.start()
+    # thread1.join()
+    # thread2.join()
+    thread_arr = []
+    for page in range(1, page_num[5]):
+        thread_arr.append(threading.Thread(target=spider_task, args=(urls[5], page, 1, 0)))
+    for thread in thread_arr:
+        thread.start()
+    for thread in thread_arr:
+        thread.join()
 
         # 设置每个线程处理的页面范围
         # page_1 = 0
